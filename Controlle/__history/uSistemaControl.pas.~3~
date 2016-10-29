@@ -1,0 +1,28 @@
+unit uSistemaControl;
+
+interface
+
+type
+  TSistemaControl = class
+  private
+    class var FInstance: TSistemaControl;
+
+  public
+    class function GetInstance: TSistemaControl;
+  end;
+
+implementation
+
+{ TSistemaControl }
+
+class function TSistemaControl.GetInstance: TSistemaControl;
+begin
+  if not Assigned(Self.FInstance) then
+  begin
+    Self.FInstance := TSistemaControl.Create();
+  end;
+
+  Result := Self.FInstance;
+end;
+
+end.

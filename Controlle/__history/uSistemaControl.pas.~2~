@@ -1,0 +1,12 @@
+unit uSistemaControl;
+
+interface
+
+type
+  TSistemaControl = class
+
+  end;
+
+implementation
+
+end.
