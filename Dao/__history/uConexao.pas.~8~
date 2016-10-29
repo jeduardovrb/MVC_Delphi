@@ -13,12 +13,13 @@ type
     FConn: TFDConnection;
 
     procedure ConfigurarConexao;
+
+    function CriarQuery: TFDQuery;
   public
     constructor Create;
     destructor Destroy; override;
 
     function GetConn: TFDConnection;
-    function CriarQuery: TFDQuery;
   end;
 
   const

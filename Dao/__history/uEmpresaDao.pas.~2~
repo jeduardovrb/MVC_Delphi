@@ -1,0 +1,14 @@
+unit uEmpresaDao;
+
+interface
+
+uses uEmpresaModel;
+
+type
+  TEmpresaDao = class
+    procedure carregar(AEmpresaModel: TEmpresa)
+  end;
+
+implementation
+
+end.

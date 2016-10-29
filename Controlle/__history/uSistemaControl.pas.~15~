@@ -9,7 +9,7 @@ type
   TSistemaControl = class
   private
     FConexao      : TConexao;
-    FEmpresa      : TEmpresaModel;
+    FEmpresa      : TEmpresa;
     FCodigoEmpreda: Integer;
 
     class var FInstance: TSistemaControl;
@@ -24,7 +24,7 @@ type
     class function GetInstance: TSistemaControl;
 
      property Conexao: TConexao read FConexao write FConexao;
-    property Empresa: TEmpresaModel read FEmpresa write FEmpresa;
+    property Empresa: TEmpresa read FEmpresa write FEmpresa;
   end;
 
 implementation
@@ -33,13 +33,13 @@ implementation
 
 procedure TSistemaControl.CarregarEmpresa;
 begin
-  FEmpresa.Carregar(FCodigoEmpreda);
+  FEmpresa.
 end;
 
 constructor TSistemaControl.Create();
 begin
   FConexao := TConexao.Create;
-  FEmpresa := TEmpresaModel.Create();
+  FEmpresa := TEmpresa.Create();
 end;
 
 destructor TSistemaControl.Destroy;

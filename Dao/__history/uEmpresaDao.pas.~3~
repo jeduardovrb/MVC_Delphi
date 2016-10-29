@@ -1,0 +1,22 @@
+unit uEmpresaDao;
+
+interface
+
+uses
+  uEmpresaModel, FireDAC.Comp.Client;
+
+type
+  TEmpresaDao = class
+    procedure carregar(AEmpresaModel: TEmpresaModel);
+  end;
+
+implementation
+
+{ TEmpresaDao }
+
+procedure TEmpresaDao.carregar(AEmpresaModel: TEmpresaModel);
+begin
+
+end;
+
+end.

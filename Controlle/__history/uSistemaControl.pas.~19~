@@ -33,7 +33,7 @@ implementation
 
 procedure TSistemaControl.CarregarEmpresa;
 begin
-  FEmpresa.Carregar(FCodigoEmpreda);
+
 end;
 
 constructor TSistemaControl.Create();

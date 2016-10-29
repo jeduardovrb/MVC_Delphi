@@ -1,0 +1,25 @@
+unit uEmpresaDao;
+
+interface
+
+uses
+  uEmpresaModel, FireDAC.Comp.Client, uSistemaControl;
+
+type
+  TEmpresaDao = class
+    procedure carregar(AEmpresaModel: TEmpresaModel);
+  end;
+
+implementation
+
+{ TEmpresaDao }
+
+procedure TEmpresaDao.carregar(AEmpresaModel: TEmpresaModel);
+var
+  VQuery: TFDQuery;
+begin
+  VQuery := TSistemaControl.GetInstance().Conexao.
+
+end;
+
+end.

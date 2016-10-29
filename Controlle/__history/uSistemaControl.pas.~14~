@@ -8,18 +8,21 @@ uses
 type
   TSistemaControl = class
   private
-    FConexao: TConexao;
-    FEmpresa: TEmpresa;
+    FConexao      : TConexao;
+    FEmpresa      : TEmpresa;
+    FCodigoEmpreda: Integer;
 
     class var FInstance: TSistemaControl;
 
   public
-    constructor Create;
+    constructor Create();
     destructor Destroy; override;
+
+    procedure SetEmpresa(ACodigoEmpresa: Integer);
 
     class function GetInstance: TSistemaControl;
 
-    property Conexao: TConexao read FConexao write FConexao;
+     property Conexao: TConexao read FConexao write FConexao;
     property Empresa: TEmpresa read FEmpresa write FEmpresa;
   end;
 
@@ -27,13 +30,15 @@ implementation
 
 { TSistemaControl }
 
-constructor TSistemaControl.Create;
+constructor TSistemaControl.Create();
 begin
   FConexao := TConexao.Create;
+  FEmpresa := TEmpresa.Create();
 end;
 
 destructor TSistemaControl.Destroy;
 begin
+  FreeAndNil(FEmpresa);
   FreeAndNil(FConexao);
 
   inherited;
@@ -47,6 +52,11 @@ begin
   end;
 
   Result := Self.FInstance;
+end;
+
+procedure TSistemaControl.SetEmpresa(ACodigoEmpresa: Integer);
+begin
+  FCodigoEmpreda := ACodigoEmpresa;
 end;
 
 end.

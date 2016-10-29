@@ -33,13 +33,13 @@ implementation
 
 procedure TSistemaControl.CarregarEmpresa;
 begin
-  FEmpresa.Carregar(FCodigoEmpreda);
+
 end;
 
 constructor TSistemaControl.Create();
 begin
   FConexao := TConexao.Create;
-  FEmpresa := TEmpresaModel.Create();
+  FEmpresa := TEmpresa.Create();
 end;
 
 destructor TSistemaControl.Destroy;

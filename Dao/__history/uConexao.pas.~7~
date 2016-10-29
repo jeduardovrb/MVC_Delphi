@@ -13,16 +13,17 @@ type
     FConn: TFDConnection;
 
     procedure ConfigurarConexao;
+
+    function CriarQuery: TFDQuery;
   public
     constructor Create;
     destructor Destroy; override;
 
     function GetConn: TFDConnection;
-    function CriarQuery: TFDQuery;
   end;
 
   const
-    PATH_BANCO: string = 'E:\MVC_DELPHI\MVC_DELPHI\DB_MVC.FDB';
+    PATH_BANCO: string = 'E:\MVC_DELPHI\DB_MVC.FDB';
 
 implementation
 
