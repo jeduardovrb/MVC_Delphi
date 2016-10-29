@@ -14,7 +14,7 @@ type
     procedure SetCodigo(const Value: Integer);
     procedure SetRSocial(const Value: string);
   public
-    procedure Carregar(ACodigo: Integer);
+    procedure Carregar;
 
     property Codigo: Integer read FCodigo write SetCodigo;
     property RSocial: string read FRSocial write SetRSocial;
@@ -32,7 +32,7 @@ var
 begin
   VEmpresaDao := TEmpresaDao.Create;
   try
-    VEmpresaDao.carregar(Self, ACodigo);
+    VEmpresaDao.carregar(Self);
   finally
     FreeAndNil(VEmpresaDao);
   end;

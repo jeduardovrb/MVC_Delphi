@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConexao, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConexao, Vcl.StdCtrls, uSistemaControl;
 
 type
   TfrmPrincipal = class(TForm)
@@ -30,7 +30,7 @@ begin
   VConexao := TConexao.Create;
   VConexao.GetConn.Connected := True;
   try
-    if VConexao.GetConn.Connected then
+    if VConexao.GetConn().Connected then
       ShowMessage('Conectado.');
   finally
     FreeAndNil(VConexao);

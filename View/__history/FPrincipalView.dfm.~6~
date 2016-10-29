@@ -24,20 +24,4 @@ object frmPrincipal: TfrmPrincipal
     TabOrder = 0
     OnClick = Button1Click
   end
-  object StatusBar1: TStatusBar
-    Left = 0
-    Top = 227
-    Width = 494
-    Height = 19
-    Panels = <
-      item
-        Width = 50
-      end
-      item
-        Width = 50
-      end>
-    ExplicitLeft = 256
-    ExplicitTop = 136
-    ExplicitWidth = 0
-  end
 end
