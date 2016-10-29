@@ -1,0 +1,39 @@
+unit uEmpresaModel;
+
+interface
+
+type
+  TEmpresaModel = class
+  private
+    FCodigo: Integer;
+    FRSocial: string;
+
+    procedure SetCodigo(const Value: Integer);
+    procedure SetRSocial(const Value: string);
+    procedure Carregar;
+
+  public
+    property Codigo: Integer read FCodigo write SetCodigo;
+    property RSocial: string read FRSocial write SetRSocial;
+  end;
+
+implementation
+
+{ TEmpresa }
+
+procedure TEmpresaModel.Carregar;
+begin
+
+end;
+
+procedure TEmpresaModel.SetCodigo(const Value: Integer);
+begin
+  FCodigo := Value;
+end;
+
+procedure TEmpresaModel.SetRSocial(const Value: string);
+begin
+  FRSocial := Value;
+end;
+
+end.
