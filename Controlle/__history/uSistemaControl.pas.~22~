@@ -9,28 +9,31 @@ type
   TSistemaControl = class
   private
     FConexao: TConexao;
-    FEmpresa: TEmpresa;
+    FEmpresa: TEmpresaModel;
 
     class var FInstance: TSistemaControl;
 
   public
-    constructor Create(ACodigoEmpresa: Integer);
+    constructor Create();
     destructor Destroy; override;
+
+    procedure SetEmpresa(ACodigoEmpresa: Integer);
+    procedure CarregarEmpresa;
 
     class function GetInstance: TSistemaControl;
 
-    property Conexao: TConexao read FConexao write FConexao;
-    property Empresa: TEmpresa read FEmpresa write FEmpresa;
+     property Conexao: TConexao read FConexao write FConexao;
+    property Empresa: TEmpresaModel read FEmpresa write FEmpresa;
   end;
 
 implementation
 
 { TSistemaControl }
 
-constructor TSistemaControl.Create(ACodigoEmpresa: Integer);
+constructor TSistemaControl.Create();
 begin
   FConexao := TConexao.Create;
-  FEmpresa := TEmpresa.Create(ACodigoEmpresa);
+  FEmpresa := TEmpresaModel.Create();
 end;
 
 destructor TSistemaControl.Destroy;

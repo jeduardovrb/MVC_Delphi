@@ -9,7 +9,7 @@ type
   TSistemaControl = class
   private
     FConexao      : TConexao;
-    FEmpresa      : TEmpresa;
+    FEmpresa      : TEmpresaModel;
     FCodigoEmpreda: Integer;
 
     class var FInstance: TSistemaControl;
@@ -19,21 +19,27 @@ type
     destructor Destroy; override;
 
     procedure SetEmpresa(ACodigoEmpresa: Integer);
+    procedure CarregarEmpresa;
 
     class function GetInstance: TSistemaControl;
 
      property Conexao: TConexao read FConexao write FConexao;
-    property Empresa: TEmpresa read FEmpresa write FEmpresa;
+    property Empresa: TEmpresaModel read FEmpresa write FEmpresa;
   end;
 
 implementation
 
 { TSistemaControl }
 
+procedure TSistemaControl.CarregarEmpresa;
+begin
+  FEmpresa.Carregar(FCodigoEmpreda);
+end;
+
 constructor TSistemaControl.Create();
 begin
   FConexao := TConexao.Create;
-  FEmpresa := TEmpresa.Create();
+  FEmpresa := TEmpresaModel.Create();
 end;
 
 destructor TSistemaControl.Destroy;
