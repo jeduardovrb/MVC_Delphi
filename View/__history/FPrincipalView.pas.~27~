@@ -4,12 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConexao, Vcl.StdCtrls, uSistemaControl;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConexao, Vcl.StdCtrls, uSistemaControl, Vcl.ComCtrls;
 
 type
   TfrmPrincipal = class(TForm)
-    Button1: TButton;
-    procedure Button1Click(Sender: TObject);
+    StatusBar1: TStatusBar;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
@@ -25,25 +24,15 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmPrincipal.Button1Click(Sender: TObject);
-var
-  VConexao: TConexao;
-begin
-  VConexao := TConexao.Create;
-  VConexao.GetConn.Connected := True;
-  try
-    if VConexao.GetConn().Connected then
-      ShowMessage('Conectado.');
-  finally
-    FreeAndNil(VConexao);
-  end;
-end;
-
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
-  TSistemaControl.GetInstance().SetEmpresa(1);
-  TSistemaControl.GetInstance().CarregarEmpresa();
+  TSistemaControl.GetInstance();
+  TSistemaControl.GetInstance().CarregarEmpresa(1);
 
+  StatusBar1.Panels[0].Text := 'Versão: 1.0';
+
+  StatusBar1.Panels[1].Text := 'Empresa: ' + FormatFloat('00', TSistemaControl.GetInstance().EmpresaModel.Codigo) + ' - ' +
+    TSistemaControl.GetInstance().EmpresaModel.RSocial;
 end;
 
 procedure TfrmPrincipal.FormDestroy(Sender: TObject);

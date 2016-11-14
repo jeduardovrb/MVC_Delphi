@@ -4,12 +4,15 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConexao, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uConexao, Vcl.StdCtrls, uSistemaControl, Vcl.ComCtrls;
 
 type
   TfrmPrincipal = class(TForm)
     Button1: TButton;
+    StatusBar1: TStatusBar;
     procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,6 +38,20 @@ begin
   finally
     FreeAndNil(VConexao);
   end;
+end;
+
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
+begin
+  TSistemaControl.GetInstance();
+  TSistemaControl.GetInstance().CarregarEmpresa(1);
+
+  StatusBar1.Panels[1].Text := 'Empresa: ' + TSistemaControl.GetInstance().EmpresaModel.Codigo.ToString() + ' - ' +
+    TSistemaControl.GetInstance().EmpresaModel.RSocial;
+end;
+
+procedure TfrmPrincipal.FormDestroy(Sender: TObject);
+begin
+  TSistemaControl.GetInstance().Destroy();
 end;
 
 initialization
