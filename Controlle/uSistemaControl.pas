@@ -22,7 +22,7 @@ type
     class function GetInstance: TSistemaControl;
 
      property Conexao: TConexao read FConexao write FConexao;
-    property EmpresaModel: TEmpresaModel read FEmpresaModel write FEmpresaModel;
+     property EmpresaModel: TEmpresaModel read FEmpresaModel write FEmpresaModel;
   end;
 
 implementation

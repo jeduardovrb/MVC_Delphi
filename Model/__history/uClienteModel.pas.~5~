@@ -30,15 +30,8 @@ implementation
 uses uClienteDao;
 
 function TClienteModel.Obter: TFDQuery;
-var
-  VClienteDao: TClienteDao;
 begin
-  VClienteDao := TClienteDao.Create;
-  try
-    Result := VClienteDao.Obter;
-  finally
-    VClienteDao.Free;
-  end;
+
 end;
 
 procedure TClienteModel.SetAcao(const Value: TAcao);

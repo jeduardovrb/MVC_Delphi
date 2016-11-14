@@ -1,0 +1,34 @@
+unit uClienteControl;
+
+interface
+
+uses
+  uClienteModel, System.SysUtils;
+
+type
+  TClienteControl = class
+  private
+    FClienteModel: TClienteModel;
+
+  public
+    constructor Create;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+{ TClienteControl }
+
+constructor TClienteControl.Create;
+begin
+  FClienteModel := TClienteModel.Create;
+end;
+
+destructor TClienteControl.Destroy;
+begin
+  FreeAndNil(FClienteModel);
+
+  inherited;
+end;
+
+end.

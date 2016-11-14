@@ -7,7 +7,6 @@ uses
 
 type
   TEmpresaDao = class
-  public
     procedure carregar(AEmpresaModel: TEmpresaModel; ACodigo: Integer);
   end;
 

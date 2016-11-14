@@ -3,10 +3,10 @@ unit uClienteModel;
 interface
 
 uses
-  uEnumerado, FireDAC.Comp.Client;
+  uEnumerado;
 
 type
-  TClienteModel = class
+  TCliente = class
   private
     FAcao: TAcao;
     FCodigo: Integer;
@@ -16,8 +16,6 @@ type
     procedure SetCodigo(const Value: Integer);
     procedure SetNome(const Value: string);
   public
-    function Obter: TFDQuery;
-
     property Codigo: Integer read FCodigo write SetCodigo;
     property Nome: string read FNome write SetNome;
     property Acao: TAcao read FAcao write SetAcao;
@@ -27,31 +25,17 @@ implementation
 
 { TCliente }
 
-uses uClienteDao;
-
-function TClienteModel.Obter: TFDQuery;
-var
-  VClienteDao: TClienteDao;
-begin
-  VClienteDao := TClienteDao.Create;
-  try
-    Result := VClienteDao.Obter;
-  finally
-    VClienteDao.Free;
-  end;
-end;
-
-procedure TClienteModel.SetAcao(const Value: TAcao);
+procedure TCliente.SetAcao(const Value: TAcao);
 begin
   FAcao := Value;
 end;
 
-procedure TClienteModel.SetCodigo(const Value: Integer);
+procedure TCliente.SetCodigo(const Value: Integer);
 begin
   FCodigo := Value;
 end;
 
-procedure TClienteModel.SetNome(const Value: string);
+procedure TCliente.SetNome(const Value: string);
 begin
   FNome := Value;
 end;

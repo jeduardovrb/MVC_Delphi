@@ -16,8 +16,6 @@ type
     procedure SetCodigo(const Value: Integer);
     procedure SetNome(const Value: string);
   public
-    function Obter: TFDQuery;
-
     property Codigo: Integer read FCodigo write SetCodigo;
     property Nome: string read FNome write SetNome;
     property Acao: TAcao read FAcao write SetAcao;
@@ -26,20 +24,6 @@ type
 implementation
 
 { TCliente }
-
-uses uClienteDao;
-
-function TClienteModel.Obter: TFDQuery;
-var
-  VClienteDao: TClienteDao;
-begin
-  VClienteDao := TClienteDao.Create;
-  try
-    Result := VClienteDao.Obter;
-  finally
-    VClienteDao.Free;
-  end;
-end;
 
 procedure TClienteModel.SetAcao(const Value: TAcao);
 begin

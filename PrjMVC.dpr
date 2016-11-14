@@ -9,7 +9,9 @@ uses
   uEmpresaDao in 'Dao\uEmpresaDao.pas',
   uEnumerado in 'Model\uEnumerado.pas',
   uClienteModel in 'Model\uClienteModel.pas',
-  uFrmCliente in 'View\uFrmCliente.pas' {frmCadastroCliente};
+  uFrmCliente in 'View\uFrmCliente.pas' {frmCadastroCliente},
+  uClienteDao in 'Dao\uClienteDao.pas',
+  uClienteControl in 'Controlle\uClienteControl.pas';
 
 {$R *.res}
 

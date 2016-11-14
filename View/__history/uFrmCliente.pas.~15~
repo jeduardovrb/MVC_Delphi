@@ -38,8 +38,6 @@ var
   VControleCliente: TClienteControl;
   VQry            : TFDQuery;
 begin
-  mmTableClientes.Close;
-
   VControleCliente := TClienteControl.Create;
   try
     VQry := VControleCliente.Obter;

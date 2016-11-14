@@ -35,7 +35,7 @@ var
 begin
   VClienteDao := TClienteDao.Create;
   try
-    Result := VClienteDao.Obter;
+
   finally
     VClienteDao.Free;
   end;

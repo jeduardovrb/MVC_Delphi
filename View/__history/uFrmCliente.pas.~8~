@@ -17,7 +17,6 @@ type
     mmTableClientes: TFDMemTable;
     DBGrid1: TDBGrid;
     dsClientes: TDataSource;
-    procedure FormShow(Sender: TObject);
   private
     procedure CarregarClientes;
   public
@@ -36,29 +35,13 @@ implementation
 procedure TfrmCadastroCliente.CarregarClientes;
 var
   VControleCliente: TClienteControl;
-  VQry            : TFDQuery;
 begin
-  mmTableClientes.Close;
-
   VControleCliente := TClienteControl.Create;
   try
-    VQry := VControleCliente.Obter;
-    try
-      VQry.FetchAll;
-      mmTableClientes.Data := VQry.Data;
-    finally
-      VQry.Close;
-      FreeAndNil(VQry);
-    end;
 
   finally
     FreeAndNil(VControleCliente);
   end;
-end;
-
-procedure TfrmCadastroCliente.FormShow(Sender: TObject);
-begin
-  Self.CarregarClientes();
 end;
 
 end.
