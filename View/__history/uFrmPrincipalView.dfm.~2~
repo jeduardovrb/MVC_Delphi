@@ -28,13 +28,14 @@ object frmPrincipal: TfrmPrincipal
       item
         Width = 50
       end>
+    ExplicitTop = 227
+    ExplicitWidth = 494
   end
   object ActionMainMenuBar1: TActionMainMenuBar
     Left = 0
     Top = 0
     Width = 702
-    Height = 25
-    UseSystemFont = False
+    Height = 29
     ActionManager = ActionManager1
     Caption = 'ActionMainMenuBar1'
     Color = clMenuBar
@@ -43,11 +44,14 @@ object frmPrincipal: TfrmPrincipal
     ColorMap.BtnSelectedFont = clBlack
     ColorMap.UnusedColor = clWhite
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
+    Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Spacing = 0
+    ExplicitLeft = 288
+    ExplicitTop = 192
+    ExplicitWidth = 150
   end
   object ActionManager1: TActionManager
     ActionBars = <

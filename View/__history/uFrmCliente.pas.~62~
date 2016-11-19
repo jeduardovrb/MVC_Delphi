@@ -29,12 +29,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure DBGrid1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure DBGrid1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     FControleCliente: TClienteControl;
 
     procedure CarregarClientes;
-    procedure CarregarEdits;
   end;
 
 var
@@ -96,20 +94,10 @@ begin
   end;
 end;
 
-procedure TfrmCadastroCliente.CarregarEdits;
+procedure TfrmCadastroCliente.DBGrid1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   edtCodigo.Text := mmTableClientes.Fields[0].AsString;
   edtNome.Text   := mmTableClientes.Fields[1].AsString;
-end;
-
-procedure TfrmCadastroCliente.DBGrid1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-  Self.CarregarEdits();
-end;
-
-procedure TfrmCadastroCliente.DBGrid1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  Self.CarregarEdits();
 end;
 
 procedure TfrmCadastroCliente.FormCreate(Sender: TObject);
@@ -125,11 +113,6 @@ end;
 procedure TfrmCadastroCliente.FormShow(Sender: TObject);
 begin
   Self.CarregarClientes();
-
-  if mmTableClientes.RecordCount > 0 then
-  begin
-    Self.CarregarEdits();
-  end;
 end;
 
 end.

@@ -115,6 +115,8 @@ end;
 procedure TfrmCadastroCliente.FormCreate(Sender: TObject);
 begin
   FControleCliente := TClienteControl.Create;
+
+  Self.CarregarEdits();
 end;
 
 procedure TfrmCadastroCliente.FormDestroy(Sender: TObject);
@@ -125,11 +127,6 @@ end;
 procedure TfrmCadastroCliente.FormShow(Sender: TObject);
 begin
   Self.CarregarClientes();
-
-  if mmTableClientes.RecordCount > 0 then
-  begin
-    Self.CarregarEdits();
-  end;
 end;
 
 end.

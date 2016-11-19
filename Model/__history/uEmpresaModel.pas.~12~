@@ -34,7 +34,7 @@ begin
   try
     VEmpresaDao.carregar(Self, ACodigo);
   finally
-    VEmpresaDao.Free;
+    FreeAndNil(VEmpresaDao);
   end;
 end;
 

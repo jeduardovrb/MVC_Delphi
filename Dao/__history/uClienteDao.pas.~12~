@@ -14,7 +14,7 @@ type
 
     function Incluir(AClienteModel: TClienteModel): Boolean;
     function Alterar(AClienteModel: TClienteModel): Boolean;
-    function Excluir(AClienteModel: TClienteModel): Boolean;
+    function Deletar(AClienteModel: TClienteModel): Boolean;
     function Obter: TFDQuery;
   end;
 
@@ -43,18 +43,9 @@ begin
   FConexao := TSistemaControl.GetInstance().Conexao;
 end;
 
-function TClienteDao.Excluir(AClienteModel: TClienteModel): Boolean;
-var
-  VQry: TFDQuery;
+function TClienteDao.Deletar(AClienteModel: TClienteModel): Boolean;
 begin
-  VQry := FConexao.CriarQuery();
-  try
-    VQry.ExecSQL('delete from cliente where (codigo = :codigo)', [AClienteModel.Codigo]);
 
-    Result := True;
-  finally
-    VQry.Free;
-  end;
 end;
 
 function TClienteDao.Incluir(AClienteModel: TClienteModel): Boolean;

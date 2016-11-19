@@ -28,13 +28,10 @@ type
     procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure DBGrid1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure DBGrid1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     FControleCliente: TClienteControl;
 
     procedure CarregarClientes;
-    procedure CarregarEdits;
   end;
 
 var
@@ -82,34 +79,24 @@ end;
 
 procedure TfrmCadastroCliente.CarregarClientes;
 var
-  VQry: TFDQuery;
+  VControleCliente: TClienteControl;
+  VQry            : TFDQuery;
 begin
   mmTableClientes.Close;
 
-  VQry := FControleCliente.Obter;
+  VControleCliente := TClienteControl.Create;
   try
-    VQry.FetchAll;
-    mmTableClientes.Data := VQry.Data;
+    VQry := VControleCliente.Obter;
+    try
+      VQry.FetchAll;
+      mmTableClientes.Data := VQry.Data;
+    finally
+      VQry.Close;
+      VQry.Free;
+    end;
   finally
-    VQry.Close;
-    VQry.Free;
+    VControleCliente.Free;
   end;
-end;
-
-procedure TfrmCadastroCliente.CarregarEdits;
-begin
-  edtCodigo.Text := mmTableClientes.Fields[0].AsString;
-  edtNome.Text   := mmTableClientes.Fields[1].AsString;
-end;
-
-procedure TfrmCadastroCliente.DBGrid1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-  Self.CarregarEdits();
-end;
-
-procedure TfrmCadastroCliente.DBGrid1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  Self.CarregarEdits();
 end;
 
 procedure TfrmCadastroCliente.FormCreate(Sender: TObject);
@@ -125,11 +112,6 @@ end;
 procedure TfrmCadastroCliente.FormShow(Sender: TObject);
 begin
   Self.CarregarClientes();
-
-  if mmTableClientes.RecordCount > 0 then
-  begin
-    Self.CarregarEdits();
-  end;
 end;
 
 end.

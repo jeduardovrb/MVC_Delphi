@@ -42,8 +42,8 @@ end;
 
 destructor TSistemaControl.Destroy;
 begin
-  FEmpresaModel.Free;
-  FConexao.Free;
+  FreeAndNil(FEmpresaModel);
+  FreeAndNil(FConexao);
 
   inherited;
 end;

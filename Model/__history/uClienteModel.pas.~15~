@@ -16,6 +16,8 @@ type
     procedure SetCodigo(const Value: Integer);
     procedure SetNome(const Value: string);
   public
+    procedure Carregar();
+
     function Obter: TFDQuery;
     function Salvar: Boolean;
 

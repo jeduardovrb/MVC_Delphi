@@ -16,8 +16,6 @@ type
 
     function Salvar: Boolean;
     function Obter: TFDQuery;
-
-    property ClienteModel: TClienteModel read FClienteModel write FClienteModel;
   end;
 
 implementation
@@ -39,11 +37,6 @@ end;
 function TClienteControl.Obter: TFDQuery;
 begin
   Result := FClienteModel.Obter;
-end;
-
-function TClienteControl.Salvar: Boolean;
-begin
-  Result := FClienteModel.Salvar;
 end;
 
 end.

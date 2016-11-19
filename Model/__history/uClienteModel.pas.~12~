@@ -53,7 +53,7 @@ begin
     case FAcao of
       uEnumerado.tacIncluir: Result := VClienteDao.Incluir(Self);
       uEnumerado.tacAlterar: Result := VClienteDao.Alterar(Self);
-      uEnumerado.tacExcluir: Result := VClienteDao.Excluir(Self);
+      uEnumerado.tacExcluir: Result := VClienteDao.Deletar(Self);
     end;
   finally
     VClienteDao.Free;

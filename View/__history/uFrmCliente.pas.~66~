@@ -126,10 +126,7 @@ procedure TfrmCadastroCliente.FormShow(Sender: TObject);
 begin
   Self.CarregarClientes();
 
-  if mmTableClientes.RecordCount > 0 then
-  begin
-    Self.CarregarEdits();
-  end;
+  DBGrid1.SetFocus;
 end;
 
 end.

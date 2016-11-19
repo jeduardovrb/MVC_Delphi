@@ -29,7 +29,7 @@ begin
       VQuery.Close;
     end;
   finally
-    VQuery.Free;
+    FreeAndNil(VQuery);
   end;
 end;
 

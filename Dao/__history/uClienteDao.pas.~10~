@@ -1,0 +1,53 @@
+unit uClienteDao;
+
+interface
+
+uses
+  FireDAC.Comp.Client, uConexao, uClienteModel;
+
+type
+  TClienteDao = class
+  private
+    FConexao: TConexao;
+  public
+    constructor Create;
+
+    function Incluir(AClienteModel: TClienteModel): Boolean;
+    function Obter: TFDQuery;
+  end;
+
+implementation
+
+{ TClienteDao }
+
+uses uSistemaControl;
+
+constructor TClienteDao.Create;
+begin
+  FConexao := TSistemaControl.GetInstance().Conexao;
+end;
+
+function TClienteDao.Incluir(AClienteModel: TClienteModel): Boolean;
+var
+  VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('insert into cliente (nome) values (:nome)', []);
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TClienteDao.Obter: TFDQuery;
+var
+  VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+
+  VQry.Open('select codigo, nome from cliente');
+
+  Result := VQry;
+end;
+
+end.

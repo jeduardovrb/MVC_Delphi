@@ -36,7 +36,7 @@ object frmCadastroCliente: TfrmCadastroCliente
     Top = 35
     Width = 121
     Height = 21
-    TabOrder = 2
+    TabOrder = 0
   end
   object DBGrid1: TDBGrid
     Left = 8
@@ -45,14 +45,12 @@ object frmCadastroCliente: TfrmCadastroCliente
     Height = 193
     DataSource = dsClientes
     DrawingStyle = gdsGradient
-    TabOrder = 0
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OnKeyUp = DBGrid1KeyUp
-    OnMouseUp = DBGrid1MouseUp
     Columns = <
       item
         Expanded = False
@@ -71,7 +69,7 @@ object frmCadastroCliente: TfrmCadastroCliente
     Width = 75
     Height = 25
     Caption = 'Incluir'
-    TabOrder = 3
+    TabOrder = 2
     OnClick = Button1Click
   end
   object edtCodigo: TEdit
@@ -79,7 +77,7 @@ object frmCadastroCliente: TfrmCadastroCliente
     Top = 8
     Width = 121
     Height = 21
-    TabOrder = 1
+    TabOrder = 3
   end
   object Button2: TButton
     Left = 168
@@ -107,7 +105,7 @@ object frmCadastroCliente: TfrmCadastroCliente
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 440
+    Left = 464
     Top = 16
     object mmTableClientesCODIGO: TIntegerField
       DisplayLabel = 'C'#243'digo'

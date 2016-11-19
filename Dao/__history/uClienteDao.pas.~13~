@@ -14,7 +14,7 @@ type
 
     function Incluir(AClienteModel: TClienteModel): Boolean;
     function Alterar(AClienteModel: TClienteModel): Boolean;
-    function Excluir(AClienteModel: TClienteModel): Boolean;
+    function Deletar(AClienteModel: TClienteModel): Boolean;
     function Obter: TFDQuery;
   end;
 
@@ -43,7 +43,7 @@ begin
   FConexao := TSistemaControl.GetInstance().Conexao;
 end;
 
-function TClienteDao.Excluir(AClienteModel: TClienteModel): Boolean;
+function TClienteDao.Deletar(AClienteModel: TClienteModel): Boolean;
 var
   VQry: TFDQuery;
 begin
