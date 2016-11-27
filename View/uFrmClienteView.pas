@@ -1,4 +1,4 @@
-unit uFrmCliente;
+unit uFrmClienteView;
 
 interface
 
@@ -22,6 +22,7 @@ type
     edtCodigo: TEdit;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -30,6 +31,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure DBGrid1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DBGrid1MouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure Button4Click(Sender: TObject);
   private
     FControleCliente: TClienteControl;
 
@@ -48,13 +50,13 @@ implementation
 
 procedure TfrmCadastroCliente.Button1Click(Sender: TObject);
 begin
-  FControleCliente.ClienteModel.Acao := uEnumerado.tacIncluir;
-  FControleCliente.ClienteModel.Nome := edtNome.Text;
+  FControleCliente.ClienteModel.Acao   := uEnumerado.tacIncluir;
+  FControleCliente.ClienteModel.Nome   := edtNome.Text;
 
-   if FControleCliente.Salvar() then
-     ShowMessage('Incluido com sucesso.');
+  if FControleCliente.Salvar() then
+    ShowMessage('Incluido com sucesso.');
 
-   Self.CarregarClientes();
+  Self.CarregarClientes();
 end;
 
 procedure TfrmCadastroCliente.Button2Click(Sender: TObject);
@@ -63,21 +65,40 @@ begin
   FControleCliente.ClienteModel.Codigo := StrToInt(edtCodigo.Text);
   FControleCliente.ClienteModel.Nome   := edtNome.Text;
 
-   if FControleCliente.Salvar() then
-     ShowMessage('Alterado com sucesso.');
+  if FControleCliente.Salvar() then
+    ShowMessage('Alterado com sucesso.');
 
-   Self.CarregarClientes();
+  Self.CarregarClientes();
 end;
 
 procedure TfrmCadastroCliente.Button3Click(Sender: TObject);
+var
+  VCodigo: String;
 begin
-  FControleCliente.ClienteModel.Acao   := uEnumerado.tacExcluir;
-  FControleCliente.ClienteModel.Codigo := StrToInt(edtCodigo.Text);
+  VCodigo := InputBox('Excluir', 'Digite o código do Cliente', EmptyStr);
 
-   if FControleCliente.Salvar() then
-     ShowMessage('Excluido com sucesso.');
+  if VCodigo.Trim <> EmptyStr then
+  begin
+    if (Application.MessageBox(PChar('Deseja excluir o registro?'), 'Confirmação', MB_YESNO
+      + MB_DEFBUTTON2 + MB_ICONQUESTION) = mrYes) then
+    begin
+      FControleCliente.ClienteModel.Acao   := uEnumerado.tacExcluir;
+      FControleCliente.ClienteModel.Codigo := StrToInt(edtCodigo.Text);
 
-   Self.CarregarClientes();
+      if FControleCliente.Salvar() then
+        ShowMessage('Excluido com sucesso.');
+
+      Self.CarregarClientes();
+    end;
+  end;
+end;
+
+procedure TfrmCadastroCliente.Button4Click(Sender: TObject);
+begin
+  FControleCliente.ClienteModel.Codigo := FControleCliente.ClienteModel.GetId(1);
+  edtCodigo.Text := FControleCliente.ClienteModel.Codigo.ToString();
+  edtNome.Clear;
+  edtNome.SetFocus();
 end;
 
 procedure TfrmCadastroCliente.CarregarClientes;

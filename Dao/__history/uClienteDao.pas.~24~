@@ -14,7 +14,8 @@ type
 
     function Incluir(AClienteModel: TClienteModel): Boolean;
     function Alterar(AClienteModel: TClienteModel): Boolean;
-    function Deletar(AClienteModel: TClienteModel): Boolean;
+    function Excluir(AClienteModel: TClienteModel): Boolean;
+    function GetId(AAutoIncrementar: Integer): Integer;
     function Obter: TFDQuery;
   end;
 
@@ -43,9 +44,35 @@ begin
   FConexao := TSistemaControl.GetInstance().Conexao;
 end;
 
-function TClienteDao.Deletar(AClienteModel: TClienteModel): Boolean;
+function TClienteDao.Excluir(AClienteModel: TClienteModel): Boolean;
+var
+  VQry: TFDQuery;
 begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('delete from cliente where (codigo = :codigo)', [AClienteModel.Codigo]);
 
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TClienteDao.GetId(AAutoIncrementar: Integer): Integer;
+var
+  VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.Open('select gen_id(gen_cliente_id, 1) from rdb$database');
+    try
+      Result := VQry.Fields[0].AsInteger;
+    finally
+      VQry.Close;
+    end;
+  finally
+    VQry.Free;
+  end;
 end;
 
 function TClienteDao.Incluir(AClienteModel: TClienteModel): Boolean;
@@ -54,7 +81,7 @@ var
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('insert into cliente (nome) values (:nome)', [AClienteModel.Nome]);
+    VQry.ExecSQL('insert into cliente (codigo, nome) values (:codigo, :nome)', [AClienteModel.Codigo, AClienteModel.Nome]);
 
     Result := True;
   finally

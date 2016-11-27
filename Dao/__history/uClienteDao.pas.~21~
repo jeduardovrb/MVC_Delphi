@@ -3,7 +3,7 @@ unit uClienteDao;
 interface
 
 uses
-  FireDAC.Comp.Client, uConexao, uClienteModel, System.SysUtils;
+  FireDAC.Comp.Client, uConexao, uClienteModel;
 
 type
   TClienteDao = class
@@ -64,9 +64,9 @@ var
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.Open('select gen_id(gen_cliente_id, ' + IntToStr(AAutoIncrementar) + ' ) from rdb$database');
+    VQry.Open('select gen_id(gen_cliente_id, 1) from rdb$database');
     try
-      Result := VQry.Fields[0].AsInteger;
+      Result :=
     finally
       VQry.Close;
     end;
@@ -81,7 +81,7 @@ var
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('insert into cliente (codigo, nome) values (:codigo, :nome)', [AClienteModel.Codigo, AClienteModel.Nome]);
+    VQry.ExecSQL('insert into cliente (nome) values (:nome)', [AClienteModel.Nome]);
 
     Result := True;
   finally
@@ -95,7 +95,7 @@ var
 begin
   VQry := FConexao.CriarQuery();
 
-  VQry.Open('select codigo, nome from cliente order by 1');
+  VQry.Open('select codigo, nome from cliente');
 
   Result := VQry;
 end;

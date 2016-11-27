@@ -18,6 +18,7 @@ type
   public
     function Obter: TFDQuery;
     function Salvar: Boolean;
+    function GetId(AAutoIncrementar: Integer): Integer;
 
     property Codigo: Integer read FCodigo write SetCodigo;
     property Nome: string read FNome write SetNome;
@@ -29,6 +30,18 @@ implementation
 { TCliente }
 
 uses uClienteDao;
+
+function TClienteModel.GetId(AAutoIncrementar: Integer): Integer;
+var
+  VClienteDao: TClienteDao;
+begin
+  VClienteDao := TClienteDao.Create;
+  try
+    Result := VClienteDao.GetId(AAutoIncrementar);
+  finally
+    VClienteDao.Free;
+  end;
+end;
 
 function TClienteModel.Obter: TFDQuery;
 var

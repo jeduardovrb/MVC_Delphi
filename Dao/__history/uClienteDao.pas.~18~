@@ -9,12 +9,14 @@ type
   TClienteDao = class
   private
     FConexao: TConexao;
+    function GetIdooo: Integer;
   public
     constructor Create;
 
     function Incluir(AClienteModel: TClienteModel): Boolean;
     function Alterar(AClienteModel: TClienteModel): Boolean;
-    function Deletar(AClienteModel: TClienteModel): Boolean;
+    function Excluir(AClienteModel: TClienteModel): Boolean;
+    function GetId: Integer;
     function Obter: TFDQuery;
   end;
 
@@ -43,7 +45,7 @@ begin
   FConexao := TSistemaControl.GetInstance().Conexao;
 end;
 
-function TClienteDao.Deletar(AClienteModel: TClienteModel): Boolean;
+function TClienteDao.Excluir(AClienteModel: TClienteModel): Boolean;
 var
   VQry: TFDQuery;
 begin
@@ -52,6 +54,18 @@ begin
     VQry.ExecSQL('delete from cliente where (codigo = :codigo)', [AClienteModel.Codigo]);
 
     Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TClienteDao.GetId: Integer;
+var
+  VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    Result := VQry.Open('select gen_id(gen_cliente_id, 1) from rdb$database');
   finally
     VQry.Free;
   end;

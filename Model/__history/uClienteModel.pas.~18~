@@ -17,6 +17,8 @@ type
     procedure SetNome(const Value: string);
   public
     function Obter: TFDQuery;
+    function Salvar: Boolean;
+    function GetId(AAutoIncrementar: Integer): Integer;
 
     property Codigo: Integer read FCodigo write SetCodigo;
     property Nome: string read FNome write SetNome;
@@ -29,6 +31,18 @@ implementation
 
 uses uClienteDao;
 
+function TClienteModel.GetId(AAutoIncrementar: Integer): Integer;
+var
+  VClienteDao: TClienteDao;
+begin
+  VClienteDao := TClienteDao.Create;
+  try
+    Result := VClienteDao.getiObter;
+  finally
+    VClienteDao.Free;
+  end;
+end;
+
 function TClienteModel.Obter: TFDQuery;
 var
   VClienteDao: TClienteDao;
@@ -36,6 +50,24 @@ begin
   VClienteDao := TClienteDao.Create;
   try
     Result := VClienteDao.Obter;
+  finally
+    VClienteDao.Free;
+  end;
+end;
+
+function TClienteModel.Salvar: Boolean;
+var
+  VClienteDao: TClienteDao;
+begin
+  Result := False;
+
+  VClienteDao := TClienteDao.Create;
+  try
+    case FAcao of
+      uEnumerado.tacIncluir: Result := VClienteDao.Incluir(Self);
+      uEnumerado.tacAlterar: Result := VClienteDao.Alterar(Self);
+      uEnumerado.tacExcluir: Result := VClienteDao.Excluir(Self);
+    end;
   finally
     VClienteDao.Free;
   end;

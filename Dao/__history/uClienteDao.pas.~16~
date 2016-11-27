@@ -3,7 +3,7 @@ unit uClienteDao;
 interface
 
 uses
-  FireDAC.Comp.Client, uConexao, uClienteModel, System.SysUtils;
+  FireDAC.Comp.Client, uConexao, uClienteModel;
 
 type
   TClienteDao = class
@@ -15,7 +15,7 @@ type
     function Incluir(AClienteModel: TClienteModel): Boolean;
     function Alterar(AClienteModel: TClienteModel): Boolean;
     function Excluir(AClienteModel: TClienteModel): Boolean;
-    function GetId(AAutoIncrementar: Integer): Integer;
+    function GetId: Integer;
     function Obter: TFDQuery;
   end;
 
@@ -58,18 +58,13 @@ begin
   end;
 end;
 
-function TClienteDao.GetId(AAutoIncrementar: Integer): Integer;
+function TClienteDao.GetId: Integer;
 var
   VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.Open('select gen_id(gen_cliente_id, ' + IntToStr(AAutoIncrementar) + ' ) from rdb$database');
-    try
-      Result := VQry.Fields[0].AsInteger;
-    finally
-      VQry.Close;
-    end;
+    Result := VQry.Open('select gen_id(gen_cliente_id, 0) from rdb$database');
   finally
     VQry.Free;
   end;
@@ -81,7 +76,7 @@ var
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('insert into cliente (codigo, nome) values (:codigo, :nome)', [AClienteModel.Codigo, AClienteModel.Nome]);
+    VQry.ExecSQL('insert into cliente (nome) values (:nome)', [AClienteModel.Nome]);
 
     Result := True;
   finally
@@ -95,7 +90,7 @@ var
 begin
   VQry := FConexao.CriarQuery();
 
-  VQry.Open('select codigo, nome from cliente order by 1');
+  VQry.Open('select codigo, nome from cliente');
 
   Result := VQry;
 end;
